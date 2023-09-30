@@ -40,6 +40,7 @@ typedef struct {
 // Tap dance enums
 enum {
   TD_KANA_HAEN,
+  TD_TAB,
 };
 
 td_state_t cur_dance(tap_dance_state_t *state);
@@ -47,6 +48,8 @@ td_state_t cur_dance(tap_dance_state_t *state);
 // For the x tap dance. Put it here so it can be used in any keymap
 void kana_finished(tap_dance_state_t *state, void *user_data);
 void kana_reset(tap_dance_state_t *state, void *user_data);
+void tab_finished(tap_dance_state_t *state, void *user_data);
+void tab_reset(tap_dance_state_t *state, void *user_data);
 
 td_state_t cur_dance(tap_dance_state_t *state) {
     if (state->count == 1) {
@@ -83,7 +86,7 @@ void kana_finished(tap_dance_state_t *state, void *user_data) {
         case TD_SINGLE_TAP: register_code(KC_LNG1); break;
         case TD_SINGLE_HOLD: layer_on(3); break;
         case TD_DOUBLE_TAP: register_code(KC_LNG2); break;
-        case TD_DOUBLE_HOLD: register_code(KC_LCTL); break;
+        case TD_DOUBLE_HOLD: register_code(KC_LSFT); break;
         // Last case is for fast typing. Assuming your key is `f`:
         // For example, when typing the word `buffer`, and you want to make sure that you send `ff` and not `Esc`.
         // In order to type `ff` when typing fast, the next character will have to be hit within the `TAPPING_TERM`, which by default is 200ms.
@@ -97,15 +100,48 @@ void kana_reset(tap_dance_state_t *state, void *user_data) {
         case TD_SINGLE_TAP: unregister_code(KC_LNG1); break;
         case TD_SINGLE_HOLD: layer_off(3); break;
         case TD_DOUBLE_TAP: unregister_code(KC_LNG2); break;
-        case TD_DOUBLE_HOLD: unregister_code(KC_LCTL); break;
+        case TD_DOUBLE_HOLD: unregister_code(KC_LSFT); break;
         // case TD_DOUBLE_SINGLE_TAP: unregister_code(KC_X); break;
         default: break;
     }
     kana_tap_state.state = TD_NONE;
 }
 
+static td_tap_t tab_tap_state = {
+    .is_press_action = true,
+    .state = TD_NONE
+};
+
+void tab_finished(tap_dance_state_t *state, void *user_data) {
+    tab_tap_state.state = cur_dance(state);
+    switch (tab_tap_state.state) {
+        case TD_SINGLE_TAP: register_code(KC_TAB); break;
+        case TD_SINGLE_HOLD: layer_on(1); break;
+        case TD_DOUBLE_TAP: register_code(KC_ESC); break;
+        case TD_DOUBLE_HOLD: register_code(KC_LCTL); break;
+        // Last case is for fast typing. Assuming your key is `f`:
+        // For example, when typing the word `buffer`, and you want to make sure that you send `ff` and not `Esc`.
+        // In order to type `ff` when typing fast, the next character will have to be hit within the `TAPPING_TERM`, which by default is 200ms.
+        // case TD_DOUBLE_SINGLE_TAP: tap_code(KC_X); register_code(KC_X); break;
+        default: break;
+    }
+}
+
+void tab_reset(tap_dance_state_t *state, void *user_data) {
+    switch (tab_tap_state.state) {
+        case TD_SINGLE_TAP: unregister_code(KC_TAB); break;
+        case TD_SINGLE_HOLD: layer_off(1); break;
+        case TD_DOUBLE_TAP: unregister_code(KC_ESC); break;
+        case TD_DOUBLE_HOLD: unregister_code(KC_LCTL); break;
+        // case TD_DOUBLE_SINGLE_TAP: unregister_code(KC_X); break;
+        default: break;
+    }
+    tab_tap_state.state = TD_NONE;
+}
+
 tap_dance_action_t tap_dance_actions[] = {
-    [TD_KANA_HAEN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, kana_finished, kana_reset)
+    [TD_KANA_HAEN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, kana_finished, kana_reset),
+    [TD_TAB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, tab_finished, tab_reset)
 };
 
 // clang-format off
@@ -115,7 +151,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
     KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                            KC_H     , KC_J     , KC_K     , KC_L     , MT(MOD_LCTL,KC_MINS),
     MT(MOD_LSFT,KC_Z), KC_X     , KC_C     , KC_V     , KC_B     ,                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , MT(MOD_LSFT,KC_SLSH),
-    KC_LCTL  , KC_LALT  , KC_LGUI  ,LT(1,KC_LNG2),LT(2,KC_SPC),TD(TD_KANA_HAEN),MT(MOD_LSFT,KC_BSPC),LT(1,KC_ENT), _______ , _______  , _______ , TG(1)
+    KC_LCTL  , KC_LALT  , KC_LGUI  ,TD(TD_TAB),LT(2,KC_SPC),TD(TD_KANA_HAEN),MT(MOD_LSFT,KC_BSPC),LT(1,KC_ENT), _______ , _______  , _______ , TG(1)
   ),
 
   [1] = LAYOUT_universal(
