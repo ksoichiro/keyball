@@ -53,7 +53,10 @@ void tab_reset(tap_dance_state_t *state, void *user_data);
 
 td_state_t cur_dance(tap_dance_state_t *state) {
     if (state->count == 1) {
-        if (state->interrupted || !state->pressed) return TD_SINGLE_TAP;
+        // Prefer to send a 'HOLD' over a 'SINGLE_TAP' if the key has been interrupted.
+        // This is the same as HOLD_ON_OTHER_KEY_PRESSED.
+        if (state->interrupted) return TD_SINGLE_HOLD;
+        if (!state->pressed) return TD_SINGLE_TAP;
         // Key has not been interrupted, but the key is still held. Means you want to send a 'HOLD'.
         else return TD_SINGLE_HOLD;
     } else if (state->count == 2) {
