@@ -147,40 +147,6 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_TAB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, tab_finished, tab_reset)
 };
 
-bool is_gui_tab_active = false; // ADD this near the beginning of keymap.c
-uint16_t gui_tab_timer = 0;     // we will be using them soon.
-
-enum custom_keycodes {          // Make sure have the awesome keycode ready
-  GUI_TAB = SAFE_RANGE,
-};
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) { // This will do most of the grunt work with the keycodes.
-    case GUI_TAB:
-      if (record->event.pressed) {
-        if (!is_gui_tab_active) {
-          is_gui_tab_active = true;
-          register_code(KC_LGUI);
-        }
-        gui_tab_timer = timer_read();
-        register_code(KC_TAB);
-      } else {
-        unregister_code(KC_TAB);
-      }
-      break;
-  }
-  return true;
-}
-
-void matrix_scan_user(void) { // The very important timer.
-  if (is_gui_tab_active) {
-    if (timer_elapsed(gui_tab_timer) > 500) {
-      unregister_code(KC_LGUI);
-      is_gui_tab_active = false;
-    }
-  }
-}
-
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
@@ -194,7 +160,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [1] = LAYOUT_universal(
     KC_ESC    , KC_Q    , KC_W     , KC_E     , XXXXXXX  ,                            G(KC_LEFT),G(KC_RIGHT),LSG(KC_T), S(C(KC_TAB)), C(KC_TAB) ,
     KC_LCTL   , KC_A    , KC_S     , KC_D     , KC_F     ,                            KC_LEFT  , KC_DOWN  , KC_UP    , KC_RIGHT , XXXXXXX  ,
-    KC_LSFT   , XXXXXXX , XXXXXXX  , XXXXXXX  , KC_V     ,                            GUI_TAB  , KC_BTN1  , KC_BTN3  , KC_BTN2  , QK_KB_6  ,
+    KC_LSFT   , XXXXXXX , XXXXXXX  , XXXXXXX  , KC_V     ,                            KC_TAB   , KC_BTN1  , KC_BTN3  , KC_BTN2  , QK_KB_6  ,
     _______   , _______ , _______  , XXXXXXX  , _______  , XXXXXXX  ,      KC_RGUI  , _______  , _______  , _______  , _______  , TG(1)
   ),
 
