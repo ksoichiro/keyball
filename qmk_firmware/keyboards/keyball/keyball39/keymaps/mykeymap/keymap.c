@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "quantum.h"
 
 // const uint16_t PROGMEM as_combo[] = {KC_A, KC_S, COMBO_END};
-const uint16_t PROGMEM as_combo[] = {KC_LSFT, KC_LNG1, COMBO_END};
+const uint16_t PROGMEM as_combo[] = {KC_LSFT, LT(3,KC_LNG1), COMBO_END};
 // const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
 // const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
 // const uint16_t PROGMEM lmin_combo[] = {KC_L, KC_MINS, COMBO_END};
