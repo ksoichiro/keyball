@@ -21,17 +21,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "quantum.h"
 
 // const uint16_t PROGMEM as_combo[] = {KC_A, KC_S, COMBO_END};
-const uint16_t PROGMEM as_combo[] = {KC_LSFT, LT(3,KC_LNG1), COMBO_END};
+// const uint16_t PROGMEM as_combo[] = {KC_LSFT, LT(3,KC_LNG1), COMBO_END};
 // const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
 // const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
 // const uint16_t PROGMEM lmin_combo[] = {KC_L, KC_MINS, COMBO_END};
-const uint16_t PROGMEM lmin_combo[] = {KC_LSFT, KC_DEL, COMBO_END};
-combo_t key_combos[] = {
-    COMBO(as_combo, KC_LNG2),
-    // COMBO(df_combo, KC_LNG1),
-    // COMBO(jk_combo, KC_BSPC),
-    COMBO(lmin_combo, KC_DEL),
-};
+// const uint16_t PROGMEM lmin_combo[] = {KC_LSFT, KC_DEL, COMBO_END};
+// combo_t key_combos[] = {
+//     COMBO(as_combo, KC_LNG2),
+//     // COMBO(df_combo, KC_LNG1),
+//     // COMBO(jk_combo, KC_BSPC),
+//     COMBO(lmin_combo, KC_DEL),
+// };
 
 // typedef enum {
 //     TD_NONE,
@@ -167,7 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
     KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                            KC_H     , KC_J     , KC_K     , KC_L     , MT(MOD_LCTL,KC_MINS),
     KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , MT(MOD_LSFT,KC_SLSH),
-    KC_LCTL  , KC_LALT  , KC_LGUI  , LT(1,KC_TAB), LT(2,KC_SPC),LT(3,KC_LNG1),KC_LSFT,LT(1,KC_ENT), _______ , _______  , _______ , TG(1)
+    KC_LCTL  , KC_LALT  , KC_LGUI  , LT(1,KC_TAB), LT(2,KC_SPC),LT(3,KC_LNG2),MT(MOD_LSFT,KC_LNG1),LT(1,KC_ENT), _______ , _______  , _______ , TG(1)
     //KC_LCTL  , KC_LALT  , KC_LGUI  ,TD(TD_TAB),LT(2,KC_SPC),TD(TD_KANA_HAEN),MT(MOD_LSFT,KC_BSPC),LT(1,KC_ENT), _______ , _______  , _______ , TG(1)
   ),
 
