@@ -189,7 +189,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F1    , KC_F2    , KC_F3    , KC_F4    ,  KC_F5    ,                           KC_F6    , KC_F7    , KC_F8    , KC_F9    , KC_F10   ,
     QK_KB_5  , QK_KB_3  , QK_KB_2  , QK_KB_4  ,  QK_KB_1  ,                           KC_F14   , KC_F15   , QK_KB_1  , C(KC_UP) , RGB_MOD ,
     QK_KB_8  , QK_KB_9  , XXXXXXX  , XXXXXXX  ,  XXXXXXX  ,                           KC_KB_VOLUME_DOWN, KC_KB_VOLUME_UP, KC_KB_MUTE, G(KC_L)  , RGB_TOG ,
-    _______  , _______  , _______  , _______  ,  _______  , _______  ,     _______  , _______  , _______  , _______  , _______  , XXXXXXX
+    _______  , _______  , _______  , _______  ,  _______  , _______  ,     KC_DEL   , _______  , _______  , _______  , _______  , XXXXXXX
   ),
 };
 // clang-format on
