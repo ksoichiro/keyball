@@ -20,18 +20,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
-// const uint16_t PROGMEM as_combo[] = {KC_A, KC_S, COMBO_END};
-// const uint16_t PROGMEM as_combo[] = {KC_LSFT, LT(3,KC_LNG1), COMBO_END};
-// const uint16_t PROGMEM df_combo[] = {KC_D, KC_F, COMBO_END};
-// const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
-// const uint16_t PROGMEM lmin_combo[] = {KC_L, KC_MINS, COMBO_END};
-// const uint16_t PROGMEM lmin_combo[] = {KC_LSFT, KC_DEL, COMBO_END};
-// combo_t key_combos[] = {
-//     COMBO(as_combo, KC_LNG2),
-//     // COMBO(df_combo, KC_LNG1),
-//     // COMBO(jk_combo, KC_BSPC),
-//     COMBO(lmin_combo, KC_DEL),
-// };
+const uint16_t PROGMEM qw_combo[] = {KC_Q, KC_W, COMBO_END};
+const uint16_t PROGMEM op_combo[] = {KC_O, KC_P, COMBO_END};
+combo_t key_combos[] = {
+    COMBO(qw_combo, QK_BOOT),
+    COMBO(op_combo, QK_BOOT),
+};
 
 // typedef enum {
 //     TD_NONE,
