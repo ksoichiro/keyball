@@ -172,10 +172,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [1] = LAYOUT_universal(
-    KC_ESC    , KC_Q    , KC_W     , KC_E     , XXXXXXX  ,                            G(KC_LEFT),G(KC_RIGHT),LSG(KC_T), S(C(KC_TAB)), C(KC_TAB) ,
+    KC_ESC    , KC_Q    , KC_W     , KC_E     , KC_F3    ,                            G(KC_LEFT),G(KC_RIGHT),LSG(KC_T), S(C(KC_TAB)), C(KC_TAB) ,
     KC_LCTL   , KC_A    , KC_S     , KC_D     , KC_F     ,                            KC_LEFT  , KC_DOWN  , KC_UP    , KC_RIGHT , XXXXXXX  ,
     KC_LSFT   , XXXXXXX , XXXXXXX  , XXXXXXX  , KC_V     ,                            KC_TAB   , KC_BTN1  , KC_BTN3  , KC_BTN2  , QK_KB_6  ,
-    _______   , _______ , _______  , _______  , _______  , XXXXXXX  ,      KC_RGUI  , _______  , _______  , _______  , _______  , TG(1)
+    _______   , _______ , _______  , _______  , KC_SPC   , XXXXXXX  ,      KC_RGUI  , _______  , _______  , _______  , _______  , TG(1)
   ),
 
   [2] = LAYOUT_universal(
