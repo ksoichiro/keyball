@@ -20,11 +20,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
-const uint16_t PROGMEM qw_combo[] = {KC_Q, KC_W, COMBO_END};
-const uint16_t PROGMEM op_combo[] = {KC_O, KC_P, COMBO_END};
+const uint16_t PROGMEM qwe_combo[] = {KC_Q, KC_W, KC_E, COMBO_END};
+const uint16_t PROGMEM iop_combo[] = {KC_I, KC_O, KC_P, COMBO_END};
 combo_t key_combos[] = {
-    COMBO(qw_combo, QK_BOOT),
-    COMBO(op_combo, QK_BOOT),
+    COMBO(qwe_combo, QK_BOOT),
+    COMBO(iop_combo, QK_BOOT),
 };
 
 // typedef enum {
