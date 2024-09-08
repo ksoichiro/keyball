@@ -40,3 +40,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_TERM 200
 
 #define SPLIT_WATCHDOG_ENABLE
+
+#define KEYBALL_CPI_DEFAULT 600
+#define KEYBALL_SCROLL_DIV_DEFAULT 4
