@@ -186,8 +186,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [3] = LAYOUT_universal(
     KC_F1    , KC_F2    , KC_F3    , KC_F4    ,  KC_F5    ,                           KC_F6    , KC_F7    , KC_F8    , KC_F9    , KC_F10   ,
-    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,  XXXXXXX  ,                           KC_F14   , KC_F15   , QK_KB_1  , C(KC_UP) , RGB_MOD ,
-    SSNP_VRT , SSNP_HOR , SSNP_FRE , XXXXXXX  ,  XXXXXXX  ,                           KC_KB_VOLUME_DOWN, KC_KB_VOLUME_UP, KC_KB_MUTE, G(KC_L)  , RGB_TOG ,
+    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,  XXXXXXX  ,                           KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, KC_AUDIO_MUTE , C(KC_UP) , RGB_MOD ,
+    SSNP_VRT , SSNP_HOR , SSNP_FRE , XXXXXXX  ,  XXXXXXX  ,                           KC_KB_VOLUME_DOWN, KC_KB_VOLUME_UP, KC_KB_MUTE,     G(KC_L)  , RGB_TOG ,
     _______  , _______  , _______  , _______  ,  _______  , _______  ,     KC_DEL   , _______  , _______  , _______  , _______  , _______
   ),
 };
