@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 
 #include "quantum.h"
+#include "os_detection.h"
 
 const uint16_t PROGMEM qwe_combo[] = {KC_Q, KC_W, KC_E, COMBO_END};
 const uint16_t PROGMEM iop_combo[] = {KC_I, KC_O, KC_P, COMBO_END};
@@ -197,6 +198,60 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     // Auto enable scroll mode when the highest layer is 3
     keyball_set_scroll_mode(get_highest_layer(state) == 3);
     return state;
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (detected_host_os()) {
+    case OS_MACOS:
+    case OS_IOS:
+      return true;
+    default:
+      // for Ctrl+C: KC_LGUI -> KC_LCTRL
+      // for Alt+Tab: KC_RGUI -> KC_LALT
+      // for Win: Shift+Win -> KC_LGUI
+      if (record->event.pressed) {
+        switch (keycode) {
+          case MT(MOD_LGUI,KC_TAB):
+            if (record->tap.count) {
+              tap_code(KC_TAB);
+            } else {
+              if (get_mods() & MOD_MASK_SHIFT) {
+                register_mods(MOD_BIT_LGUI);
+              } else {
+                register_mods(MOD_BIT_LCTRL);
+              }
+            }
+            break;
+          case KC_RGUI:
+            register_mods(MOD_BIT_LALT);
+            break;
+          default:
+            return true;
+        }
+      } else {
+        switch (keycode) {
+          case MT(MOD_LGUI,KC_TAB):
+            if (record->tap.count) {
+              // Do nothing
+            } else {
+              if (get_mods() & MOD_BIT_LGUI) {
+                unregister_mods(MOD_BIT_LGUI);
+              } else if (get_mods() & MOD_BIT_LCTRL) {
+                unregister_mods(MOD_BIT_LCTRL);
+              }
+            }
+            break;
+          case KC_RGUI:
+            unregister_mods(MOD_BIT_LALT);
+            break;
+          default:
+            return true;
+        }
+      }
+      break;
+  }
+
+  return false;
 }
 
 #ifdef OLED_ENABLE
