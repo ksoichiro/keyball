@@ -215,7 +215,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->tap.count) {
               tap_code(KC_TAB);
             } else {
-              if (get_mods() & MOD_MASK_SHIFT) {
+              if (get_mods() & MOD_BIT_LSHIFT) {
+                unregister_mods(MOD_BIT_LSHIFT);
                 register_mods(MOD_BIT_LGUI);
               } else {
                 register_mods(MOD_BIT_LCTRL);
