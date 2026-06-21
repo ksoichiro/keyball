@@ -176,21 +176,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC    , KC_Q    , KC_W     , KC_E     , KC_F3    ,                            G(KC_LEFT) , G(KC_RIGHT) , LSG(KC_T) , S(C(KC_TAB)) , C(KC_TAB) ,
     KC_LCTL   , KC_A    , KC_S     , KC_D     , KC_F     ,                            KC_LEFT    , KC_DOWN     , KC_UP     , KC_RIGHT     , TG(1)     ,
     KC_LSFT   , XXXXXXX , XXXXXXX  , XXXXXXX  , KC_SPC   ,                            KC_TAB     , KC_BTN1     , KC_BTN3   , KC_BTN2      , QK_KB_6   ,
-    XXXXXXX   , XXXXXXX , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,      KC_RGUI  , XXXXXXX    , _______     , _______   , _______      , XXXXXXX
+    XXXXXXX   , XXXXXXX , XXXXXXX  , XXXXXXX  , MO(2)    , MO(3)    ,      KC_RGUI  , XXXXXXX    , _______     , _______   , _______      , XXXXXXX
   ),
 
   [2] = LAYOUT_universal(
     KC_1     , KC_2     , KC_3     , KC_4     , KC_5     ,                            KC_6     , KC_7     , KC_8     , KC_9     , KC_0       ,
     KC_ESC   , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            KC_MINS  , KC_EQL   , KC_INT3  , KC_SCLN  , KC_QUOT    ,
     KC_TAB   , KC_HOME  , KC_END   , XXXXXXX  , XXXXXXX  ,                            KC_LBRC  , KC_RBRC  , KC_BSLS  , KC_SLSH  , S(KC_INT1) ,
-    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,      KC_BSPC  , XXXXXXX  , _______  , _______  , _______  , XXXXXXX
+    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , _______  , _______  ,      KC_BSPC  , XXXXXXX  , _______  , _______  , _______  , XXXXXXX
   ),
 
   [3] = LAYOUT_universal(
     KC_F1    , KC_F2    , KC_F3    , KC_F4    , KC_F5    ,                            KC_F6             , KC_F7           , KC_F8         , KC_F9    , KC_F10  ,
     XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            KC_AUDIO_VOL_DOWN , KC_AUDIO_VOL_UP , KC_AUDIO_MUTE , C(KC_UP) , TG(1)   ,
     SSNP_VRT , SSNP_HOR , SSNP_FRE , XXXXXXX  , XXXXXXX  ,                            KC_KB_VOLUME_DOWN , KC_KB_VOLUME_UP , KC_KB_MUTE    , G(KC_L)  , RGB_TOG ,
-    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,      KC_DEL   , XXXXXXX           , _______         , _______       , _______  , XXXXXXX
+    XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , _______  , _______  ,      KC_DEL   , XXXXXXX           , _______         , _______       , _______  , XXXXXXX
   ),
 };
 // clang-format on
