@@ -21,6 +21,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "quantum.h"
 #include "os_detection.h"
 
+enum custom_keycodes {
+    KC_SEND = SAFE_RANGE, // Slack send: Cmd+Enter (mac) / Ctrl+Enter (Windows)
+};
+
 const uint16_t PROGMEM qwe_combo[] = {KC_Q, KC_W, KC_E, COMBO_END};
 const uint16_t PROGMEM iop_combo[] = {KC_I, KC_O, KC_P, COMBO_END};
 combo_t key_combos[] = {
@@ -176,7 +180,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC    , KC_Q    , KC_W     , KC_E     , KC_F3    ,                            G(KC_LEFT) , G(KC_RIGHT) , LSG(KC_T) , S(C(KC_TAB)) , C(KC_TAB) ,
     KC_LCTL   , KC_A    , KC_S     , KC_D     , KC_F     ,                            KC_LEFT    , KC_DOWN     , KC_UP     , KC_RIGHT     , TG(1)     ,
     KC_LSFT   , XXXXXXX , XXXXXXX  , XXXXXXX  , KC_SPC   ,                            KC_TAB     , KC_BTN1     , KC_BTN3   , KC_BTN2      , QK_KB_6   ,
-    XXXXXXX   , XXXXXXX , XXXXXXX  , XXXXXXX  , MO(2)    , MO(3)    ,      KC_RGUI  , XXXXXXX    , _______     , _______   , _______      , XXXXXXX
+    XXXXXXX   , XXXXXXX , XXXXXXX  , XXXXXXX  , MO(2)    , MO(3)    ,      KC_RGUI  , KC_SEND    , _______     , _______   , _______      , XXXXXXX
   ),
 
   [2] = LAYOUT_universal(
@@ -202,6 +206,21 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (keycode == KC_SEND) {
+    if (record->event.pressed) {
+      switch (detected_host_os()) {
+        case OS_MACOS:
+        case OS_IOS:
+          tap_code16(G(KC_ENT)); // Cmd+Enter
+          break;
+        default:
+          tap_code16(C(KC_ENT)); // Ctrl+Enter
+          break;
+      }
+    }
+    return false;
+  }
+
   switch (detected_host_os()) {
     case OS_MACOS:
     case OS_IOS:
